@@ -181,6 +181,20 @@ function git_ahead_behind_module {
   fi
 }
 
+# -----------------------------------------------------------------------------
+# append to prompt: append a '$' prompt with optional return code for previous command
+# arg: $1 foreground color
+# arg; $2 background color
+function return_code_module {
+  if [ ! "$__return_code" -eq 0 ]; then
+    local bg_color=$1
+    local fg_color=$2
+    local content=" ${symbols[flag]} $__return_code "
+    PS1+=$(section_end $fg_color $bg_color)
+    PS1+=$(section_content $fg_color $bg_color "$content")
+    __last_color=$bg_color
+  fi
+}
 
 
 function pureline_ps1 {
