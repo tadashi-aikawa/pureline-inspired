@@ -191,8 +191,8 @@ function git_status_module {
     local -i rename=0
 
     while read l; do
-      local -i num=$(cut -d" " -f1 <<< $l);
-      local kind=$(cut -d" " -f2- <<< $l);
+      local -i num=$(cut -dx -f1 <<< $l | tr x " ");
+      local kind=$(cut -dx -f2- <<< $l | tr x " ");↲
       local staged=${kind:0:1};
       local not_staged=${kind:1:2};
 
@@ -215,7 +215,7 @@ function git_status_module {
       elif [ "$staged" == "R" ]; then
         rename=$rename+$num
       fi;
-    done <<< "$(git --no-optional-locks status --porcelain | cut -c-2 | sort | uniq -c 2>/dev/null)"
+    done <<< "$(git status --porcelain | cut -c-2 | sort | uniq -c 2>/dev/null | sed -r 's/^ +//g' | tr ' ' x)"
 
     #-----------------------
     # local
