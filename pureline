@@ -192,7 +192,7 @@ function git_status_module {
 
     while read l; do
       local -i num=$(cut -dx -f1 <<< $l | tr x " ");
-      local kind=$(cut -dx -f2- <<< $l | tr x " ");↲
+      local kind=$(cut -dx -f2- <<< $l | tr x " ");
       local staged=${kind:0:1};
       local not_staged=${kind:1:2};
 
