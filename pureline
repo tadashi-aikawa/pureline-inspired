@@ -247,7 +247,7 @@ function git_status_module {
     #-----------------------
     # staged
     #-----------------------
-    local staged_content="${symbols[staged]}"
+    local staged_content="${symbols[staged]} "
     if [ ! $add_staged -eq 0 -o ! $modify_staged -eq 0 -o ! $delete_staged -eq 0 -o ! $rename -eq 0 ]; then
         if [ ! $add_staged -eq 0 ]; then
             staged_content+="+${add_staged} "
