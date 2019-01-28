@@ -247,7 +247,7 @@ function git_status_module {
     #-----------------------
     # staged
     #-----------------------
-    local staged_content="${symbols[flag]}"
+    local staged_content="${symbols[staged]}"
     if [ ! $add_staged -eq 0 -o ! $modify_staged -eq 0 -o ! $delete_staged -eq 0 -o ! $rename -eq 0 ]; then
         if [ ! $add_staged -eq 0 ]; then
             staged_content+="+${add_staged} "
@@ -276,7 +276,8 @@ function return_code_module {
   if [ ! "$__return_code" -eq 0 ]; then
     local bg_color=$1
     local fg_color=$2
-    local content=" ${symbols[flag]} $__return_code "
+    local content=" ${symbols[error]} $__return_code "
+
     PS1+=$(section_end $fg_color $bg_color)
     PS1+=$(section_content $fg_color $bg_color "$content")
     __last_color=$bg_color
@@ -339,8 +340,8 @@ declare -A symbols=(
 [soft_separator]=""
 [git]=""
 [lock]=""
-[flag]="⚑"
-[plus]="✚"
+[error]="⚠ "
+[plus]="+"
 [tick]="✔"
 [cross]="✘"
 [enter]="⏎"
@@ -348,6 +349,7 @@ declare -A symbols=(
 [battery_discharging]="▮"
 [untracked]="U"
 [stash]="🐿"
+[staged]="↗"
 [ahead]="↑"
 [behind]="↓"
 )
